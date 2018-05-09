@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::group(['prefix' => 'admin'], function() {
     // Authentication Routes...
-	Route::get('', 'AdminAuth\LoginController@showLoginForm')->name('admin.login');
+	Route::get('', 'AdminAuth\LoginController@showLoginForm');
 	Route::get('login', 'AdminAuth\LoginController@showLoginForm')->name('admin.login');
 
 	Route::post('login', 'AdminAuth\LoginController@login')->name('admin.login.process');
@@ -36,6 +36,14 @@ Route::group(['prefix' => 'admin'], function() {
 	Route::post('password/reset', 'AdminAuth\ResetPasswordController@reset');
 
 });
+
+
+//Google login
+Route::get('login/google', 'AdminAuth\GoogleController@redirectToProvider')->name('admin.login.google');
+
+Route::get('login/google/callback', 'AdminAuth\GoogleController@handleProviderCallback');
+
+
 
 Route::prefix('admin')->middleware('admin')->group(function(){
 
@@ -148,3 +156,7 @@ Route::get('/booking/decrease/{rowId}','Restaurant\BookingController@decrease');
 Route::get('/booking-list','Restaurant\BookingController@getBookList')->name('restaurant.booking.list');
 
 Route::post('/booking', 'Restaurant\BookingController@booking')->name('restaurant.process_booking');
+
+
+
+

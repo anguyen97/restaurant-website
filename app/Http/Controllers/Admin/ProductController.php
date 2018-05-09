@@ -129,7 +129,15 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all();
+        $data= $request->all();
+        // $data =  array(
+        //     'name' => $request->input('name'),
+        //     'origin_price' => $request->input('origin_price'),
+        //     'price' => $request->input('price'),
+        //     'description' => $request->input('description'),
+        //     'content' => $request->input('content'),
+        //     'category_id' => $request->input('category_id'),
+        // );
         $date = date('YmdHis', time());
         
         if ($request->hasFile('thumbnail')) {
@@ -141,12 +149,15 @@ class ProductController extends Controller
             $data['thumbnail']->storeAs('public/products',$file_name);
 
             $data['thumbnail'] = 'storage/products/'.$file_name;
+        } else {
+            $data['thumbnail'] = Product::find($id)['thumbnail'];
         }
 
         $data['slug'] = str_slug($request->name);
+        $data['status']=1;
 
-        Product::find($id)->update($data);
-        $product = Product::find($data['id'])->first();
+        $product = Product::find($id);
+
         return $product;
     }
 

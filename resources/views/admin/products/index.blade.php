@@ -82,7 +82,7 @@ Products
 								<td>
 									<div class="form-group">
 										<label for="">Origin price</label>
-										<input type="text" class="form-control" id="origin_price" placeholder="Origin price" name="origin_price" >
+										<input type="text" class="form-control" id="origin-price" placeholder="Origin price" name="origin_price" >
 									</div>
 								</td>
 							</tr>
@@ -225,13 +225,13 @@ Products
 								<td>
 									<div class="form-group">
 										<label for="">Name</label>
-										<input type="text" class="form-control" id="name" placeholder="Name" name="name" >
+										<input type="text" class="form-control" id="edit-name"  name="name" >
 									</div>
 								</td>
 								<td>
 									<div class="form-group">
 										<label for="">Origin price</label>
-										<input type="text" class="form-control" id="origin_price" placeholder="Origin price" name="origin_price" >
+										<input type="text" class="form-control" id="edit-origin-price"  name="origin-price" >
 									</div>
 								</td>
 							</tr>
@@ -239,7 +239,7 @@ Products
 								<td>
 									<div class="form-group">
 										<label for="">Category</label>
-										<select name="category_id" id="category_id" class="form-control" required="required" >
+										<select name="category_id" id="edit_category_id" class="form-control" required="required" >
 											<option value="" selected="true" id="edit-category-old"></option>
 											@foreach ($categories as $category)
 											<option value="{!!$category['id']!!}">{!!$category['name']!!}</option>
@@ -250,7 +250,7 @@ Products
 								<td>
 									<div class="form-group">
 										<label for="">Sale price</label>
-										<input type="text" class="form-control" id="price" placeholder="Sale price" name="price" >
+										<input type="text" class="form-control" id="edit-price" name="price" >
 									</div>
 								</td>
 							</tr>
@@ -258,7 +258,7 @@ Products
 								<td colspan="2">
 									<div class="form-group">
 										<label for="">Description</label>
-										<textarea type="text" class="form-control" id="description" placeholder="Description" name="description"></textarea>
+										<textarea type="text" class="form-control" id="edit-description" name="description"></textarea>
 									</div>
 								</td>
 							</tr>
@@ -281,13 +281,13 @@ Products
 										</label>			
 										<div class="fileinput fileinput-new" data-provides="fileinput">
 											<div class="fileinput-new thumbnail" style="max-width: 250px;">
-												<img id="previewimg" src="" alt="No Image" class="img-responsive" /> 
+												<img id="edit-previewimg" src="" alt="No Image" class="img-responsive" /> 
 											</div>
 											<div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 250px; max-height: 200px;"> </div>
 											<div style="margin-top: 10px;">
 												<span class="input-group-btn">
 													<a id="lfm" data-input="thumbnail" data-preview="previewimg" class="btn btn-primary">
-														<input type="file" name="thumbnail" id="thumbnail">
+														<input type="file" name="thumbnail" id="edit-thumbnail">
 													</a>
 												</span>
 												@if ($errors->has('thumbnail'))
@@ -418,22 +418,21 @@ Products
 	$('#tbl-product').on('click', '.btnEdit', function(event){
 		event.preventDefault();
 		var id= $(this).data('id');
-
+		document.getElementById('formEdit').reset();
 		$.ajax({
 			url: '{{ asset('') }}/admin/product/edit/'+id,
 			type: 'GET',
 			success: function(res){
 				$('#modalEdit').modal('show');
-				$('#formEdit #edit-id').val(res.id);
-				$('#formEdit #name').attr('value',res.name);
-				$('#formEdit #origin_price').attr('value',res.origin_price);
-				$('#formEdit #price').attr('value',res.price);
-				$('#formEdit #title-name').attr('value',res.name);
-				$('#formEdit #description').text(res.description);
-				$('#formEdit #edit-category-old').attr('value',res.category_info.id);
-				$('#formEdit #edit-category-old').text(res.category_info.name);
-				$('#formEdit #previewimg').attr('src',"http://tash.restaurant/"+res.thumbnail);
-				// $('#formEdit #content').text(htmlspecialchars_decode(htmlspecialchars_decode(res.content)));
+				$('#edit-id').attr('value',res.id);
+				$('#edit-name').attr('value',res.name);
+				$('#edit-origin-price').attr('value',res.origin_price);
+				$('#edit-price').attr('value',res.price);
+				$('#edit-title-name').attr('value',res.name);
+				$('#edit-description').text(res.description);
+				$('#edit-category-old').attr('value',res.category_info.id);
+				$('#edit-category-old').text(res.category_info.name);
+				$('#edit-previewimg').attr('src',"http://tash.restaurant/"+res.thumbnail);
 				CKEDITOR.instances.edit_content.setData(res.content);
 			},
 			error: function(xhr, ajaxOptions, thrownError){
@@ -489,22 +488,24 @@ Products
 	$('#formEdit').on('submit', function(event){
 
 		event.preventDefault();
+
 		var id = $('#edit-id').val();
+		
 		var row = document.getElementById(id);
 
-		var thumbnail = $('#formEdit #thumbnail').get(0).files[0];
+		var thumbnail = $('#edit-thumbnail').get(0).files[0];
 
 		var content = CKEDITOR.instances['edit_content'].getData();
 
 		var newInfor = new FormData();
 
-		newInfor.append('name',$('#formEdit #name').val());
-		newInfor.append('description',$('#formEdit #description').val());
+		newInfor.append('name',$('#edit-name').val());
+		newInfor.append('description',$('#edit-description').val());
 		newInfor.append('content',content);
 		newInfor.append('category_id',$('#formEdit #category_id option:selected').val());
 		newInfor.append('thumbnail',thumbnail);
-		newInfor.append('origin_price',$('#formEdit #origin_price').val());
-		newInfor.append('price',$('#formEdit #price').val());
+		newInfor.append('origin_price',$('#edit-origin-price').val());
+		newInfor.append('price',$('#edit-price').val());
 
 		$.ajax({
 			url: '{{ asset('') }}admin/product/update/'+id,
@@ -515,7 +516,10 @@ Products
 			dataType: 'JSON',
 			data: newInfor,
 			success:function(res){
-				alert(res.id);
+				$('#modalEdit').modal('hide');
+				console.log(res);
+				// toastr['success']('Update successfull!');
+				// console.log(res['price']);
 			},
 			error:function(xhr, ajaxOptions, thrownError){
 

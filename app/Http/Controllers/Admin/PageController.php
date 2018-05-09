@@ -9,6 +9,11 @@ use Yajra\Datatables\Datatables;
 
 class PageController extends Controller
 {
+
+    /**
+     * display interface
+     * @return [type] [description]
+     */
     public function getSlider()
     {
     	return view('admin.pages.slider');
@@ -31,12 +36,24 @@ class PageController extends Controller
         ->make(true);
     }
 
+
+    /**
+     * delete an imgae from slide
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
     public function destroyImage($id)
     {
     	Slider::find($id)->delete();
     	return respone()->json(['done']);
     }
 
+
+    /**
+     * save an image-slide to db
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
     public function storeImage(Request $request)
     {
         $data = $request->all();
