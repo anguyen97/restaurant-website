@@ -19,21 +19,80 @@ class AdminController extends Controller
 	{
 		// $admin_infor = Auth::guard('admin')->user();
 		// dd($admin_infor);
-		return view('admin.admins.index');
+		//return view('admin.admins.index');
+		$admin = Admin::all();
+ 		return view('admin.admins.index');
 	}
 
 	/**
 	 * [datatablesListAdmin get list admin and display into the table]
 	 * @return [type] [description]
 	 */
-	public function getListAdminDatatables()
+	public function getListUserDatatables()
 	{
 		$list = Admin::all();
+		
 		return Datatables::of($list)
 		->addColumn('action', function ($admin) {
-			return '<a title="Detail" class="btn btn-info btn-sm glyphicon glyphicon-eye-open btnShow" data-admin-id='.$admin["id"].'></a><a title="Update" class="btn btn-warning btn-sm glyphicon glyphicon-edit btnEdit" data-admin-id='.$admin["id"].'></a><a title="Delete" class="btn btn-danger btn-sm glyphicon glyphicon-trash btnDelete" data-admin-id='.$admin["id"].'></a>';
+			 return '<a title="Detail" class="btn btn-info btn-sm glyphicon glyphicon-eye-open btnShow" data-admin-id='.$admin["id"].'" id="row-'.$admin["id"].'"></a>&nbsp;&nbsp;<a title="Update" class="btn btn-warning btn-sm glyphicon glyphicon-edit btnEdit" data-admin-id='.$admin["id"].'></a>&nbsp;&nbsp;<a title="Delete" class="btn btn-danger btn-sm glyphicon glyphicon-trash btnDelete" data-admin-id='.$admin["id"].'></a>';
+			
 		})
 		->setRowId('id')
         ->make(true);
+	}
+
+	
+	/**
+	 * add new admin to db
+	 * @param  Request $request [description]
+	 * @return [type]           [description]
+	 */
+	public function adminUserStore(Request $request)
+	{
+		$data = $request->all();
+
+		$date = date('YmdHis', time());
+
+		if ($request->hasFile('thumbnail')) {
+
+            $extension = '.'.$data['thumbnail']->getClientOriginalExtension();
+
+            $file_name = md5($request->name).'_'. $date . $extension;
+
+            $data['thumbnail']->storeAs('public/admins',$file_name);
+
+            $data['avatar'] = 'storage/admins/'.$file_name;
+
+        }else {
+            $data['avatar']='storage/admins/userDefault.png';
+        }
+
+		return Admin::create($data);
+		// if ($admins!=null) {			
+		// 	return $admins;
+		// } else {
+		// 	return response()->json(['done']);
+		// }
+	}
+
+	/**
+	 * delete an Admin by id
+	 * @param  [type] $id [description]
+	 * @return [type]     [description]
+	 */
+	public function adminUserDelete($id)
+	{
+		Admin::find($id)->delete();
+		return response()->json(['done']);
+	}
+
+	/**
+	 * get admin information and display
+	 * @param  [type] $id [description]
+	 * @return [type]     [description]
+	 */
+	public function adminUserShow($id)
+	{
+		return Admin::find($id);
 	}
 }
