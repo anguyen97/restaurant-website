@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\Hash;
 use App\Admin;
 use App\Post;
 use Auth;
@@ -17,11 +18,11 @@ class AdminController extends Controller
 	 */
 	public function adminIndex()
 	{
-		// $admin_infor = Auth::guard('admin')->user();
-		// dd($admin_infor);
-		//return view('admin.admins.index');
-		$admin = Admin::all();
- 		return view('admin.admins.index');
+		// $admin = Admin::all();
+		$admin_info = Auth::guard('admin')->user();
+ 		return view('admin.admins.index',[
+ 			'admin_info' => $admin_info,
+ 		]);
 	}
 
 	/**
@@ -68,7 +69,7 @@ class AdminController extends Controller
             $data['avatar']='storage/admins/userDefault.png';
         }
 
-        $data['password']=md5($data['password']);
+        $data['password']=Hash::make($data['password']);
 		return Admin::create($data);
 		// if ($admins!=null) {			
 		// 	return $admins;

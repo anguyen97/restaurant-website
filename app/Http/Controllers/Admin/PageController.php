@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Slider;
 use Yajra\Datatables\Datatables;
+use Auth;
 
 class PageController extends Controller
 {
@@ -16,7 +17,10 @@ class PageController extends Controller
      */
     public function getSlider()
     {
-    	return view('admin.pages.slider');
+        $admin_info = Auth::guard('admin')->user();
+    	return view('admin.pages.slider',[
+            'admin_info' => $admin_info,
+        ]);
     }
 
     /**
@@ -80,5 +84,17 @@ class PageController extends Controller
         $slider = Slider::create($slide);
         
         return $slider;
+    }
+
+    /**
+     * diaplay interface about-us content management
+     * @return [type] [description]
+     */
+    public function getAboutUs()
+    {
+        $admin_info = Auth::guard('admin')->user();
+        return view('admin.pages.aboutUs',[
+            'admin_info' => $admin_info,
+        ]);
     }
 }

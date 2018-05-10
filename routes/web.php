@@ -43,8 +43,6 @@ Route::get('login/google', 'AdminAuth\GoogleController@redirectToProvider')->nam
 
 Route::get('login/google/callback', 'AdminAuth\GoogleController@handleProviderCallback');
 
-
-
 Route::prefix('admin')->middleware('admin')->group(function(){
 
 	//Redirect to home
@@ -110,6 +108,7 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 
 	Route::group(['prefix' => 'pages'], function(){
 		
+		//slide
 		Route::get('/slider', 'Admin\PageController@getSlider')->name('admin.pages.slider');
 
 		Route::get('/loadSlider', 'Admin\PageController@anyData')->name('admin.pages.dataTable');
@@ -117,6 +116,10 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 		Route::post('/slider', 'Admin\PageController@storeImage')->name('admin.pages.store');
 
 		Route::delete('/delete/{id}', 'Admin\PageController@destroyImage');
+
+		//about us page
+		Route::get('/about-us', 'Admin\PageController@getAboutUs')->name('admin.pages.aboutUs');
+		
 	});
 
 	Route::group(['prefix' => 'admins'], function(){

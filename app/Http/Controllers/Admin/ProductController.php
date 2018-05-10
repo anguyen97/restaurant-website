@@ -17,9 +17,11 @@ class ProductController extends Controller
 	 */
     public function getIndex()
     {
+        $admin_info = \Auth::guard('admin')->user();
     	$categories = Category::where('has_sub_cate','=',0)->get();
     	return view('admin.products.index',[
     		'categories' => $categories,
+            'admin_info' => $admin_info,
     	]);
     }
 
