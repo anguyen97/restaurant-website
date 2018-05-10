@@ -41,6 +41,7 @@ Admin
 										</div>
 										<div class="form-group">
 											<label for="">Password</label>
+
 											<input type="password" class="form-control" id="password" placeholder="password" name="password">
 										</div>
 										<div class="form-group">
@@ -50,11 +51,13 @@ Admin
 										<div class="form-group">
 											<label for="">Birthday</label>
 											<input type="date" class="form-control" id="birthday" placeholder="birthday" name="birthday">
+
 										</div>								
 										<div class="form-group">
 											<label for="">Phone</label>
 											<input type="text" class="form-control" id="phone" placeholder="phone" name="phone">
 										</div>
+
 										<div class="form-group">
 											<label for="">
 												<i class="fa fa-picture-o font-green" aria-hidden="true"> Avatar</i>
@@ -118,6 +121,7 @@ Admin
 
 <!-- Modal Shows-->
 <div class="modal fade" id="modalShow">
+
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -227,7 +231,6 @@ Admin
 			{ data: 'email', name: 'email' },
 			{ data: 'birthday', name: 'birthday' },
 			{ data: 'phone', name: 'phone' },
-			
 			{ data: 'created_at', name: 'created_at' },
 			{ data: 'action', name: 'action', orderable: false, searchable: false}
 			]
@@ -253,6 +256,7 @@ Admin
 		$.ajax({
 			type: 'post',
 			url: '{{ route('admin.admins.store') }}',
+
 			processData: false,
 			contentType: false,
 			cache: false,
@@ -264,7 +268,7 @@ Admin
 				$('#modalAdd').modal('hide');				
 
 				$('#tbl-admins').prepend('<tr><td width="5%">'+response.id+'</td><td>'+response.name+'</td><td><img src=\"http://tashres.com/'+response.avatar+'" alt="" height="80px"></td><td>'+response.email+'</td><td>'+response.birthday+'</td><td>'+response.phone+'</td><td>'+response.created_at+'</td><td width="20%"><a title="Detail" class="btn btn-info btn-sm glyphicon glyphicon-eye-open btnShow" data-admin-id="'+response.id+'"></a>&nbsp;&nbsp;<a title="Update" class="btn btn-warning btn-sm glyphicon glyphicon-edit btnEdit" data-admin-id="'+response.id+'"></a>&nbsp;&nbsp;<a title="Delete" class="btn btn-danger btn-sm glyphicon glyphicon-trash btnDelete" data-admin-id="'+response.id+'"></a><td></tr>');
-				
+
 				toastr["success"]("Add new admin successfully!");
 
 

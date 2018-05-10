@@ -34,14 +34,15 @@ class AdminController extends Controller
 		
 		return Datatables::of($list)
 		->addColumn('action', function ($admin) {
+
 			 return '<a title="Detail" class="btn btn-info btn-sm glyphicon glyphicon-eye-open btnShow" data-admin-id='.$admin["id"].'" id="row-'.$admin["id"].'"></a>&nbsp;&nbsp;<a title="Update" class="btn btn-warning btn-sm glyphicon glyphicon-edit btnEdit" data-admin-id='.$admin["id"].'></a>&nbsp;&nbsp;<a title="Delete" class="btn btn-danger btn-sm glyphicon glyphicon-trash btnDelete" data-admin-id='.$admin["id"].'></a>';
-			
 		})
 		->setRowId('id')
         ->make(true);
 	}
 
 	
+
 	/**
 	 * add new admin to db
 	 * @param  Request $request [description]
@@ -75,8 +76,19 @@ class AdminController extends Controller
 		// }
 	}
 
+	// public function adminUserStore(Request $request)
+	// {
+	// 	$data = $request->all();
+	// 	$admins =  Admin::create($data);
+	// 	if ($admins!=null) {			
+	// 		return $admins;
+	// 	} else {
+	// 		return response()->json(['done']);
+	// 	}
+	// }
+
 	/**
-	 * delete an Admin by id
+	 * delete admin by ids
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
@@ -85,6 +97,7 @@ class AdminController extends Controller
 		Admin::find($id)->delete();
 		return response()->json(['done']);
 	}
+
 
 	/**
 	 * get admin information and display
@@ -95,4 +108,5 @@ class AdminController extends Controller
 	{
 		return Admin::find($id);
 	}
+
 }
