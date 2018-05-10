@@ -94,6 +94,7 @@ class ProductController extends Controller
         $data['slug'] = str_slug($request->name);
 
         $product = Product::create($data);
+        $product['category_name'] = Category::find($product['category_id'])['name'];
 
         return $product;
     }

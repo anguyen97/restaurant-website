@@ -116,7 +116,7 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 
 		Route::post('/slider', 'Admin\PageController@storeImage')->name('admin.pages.store');
 
-		Route::delete('/delete/{id}', 'Admin\PageController@destroyImgae');
+		Route::delete('/delete/{id}', 'Admin\PageController@destroyImage');
 	});
 
 	Route::group(['prefix' => 'admins'], function(){
@@ -125,13 +125,13 @@ Route::prefix('admin')->middleware('admin')->group(function(){
 
 		Route::get('/listUser','Admin\AdminController@getListUserDatatables')->name('admin.admins.dataTable');
 
-		Route::get('/{id}','Admin\AdminController@adminUserShow')->name('admin.admins.show');
+		Route::get('/{id}','Admin\AdminController@adminShow')->name('admin.admins.show');
 
 		Route::post('/store','Admin\AdminController@adminUserStore')->name('admin.admins.store');
 
 		Route::put('/update/{id}','Admin\AdminController@adminUserUpdate')->name('admin.admins.update');
 
-		Route::delete('/delete/{id}','Admin\AdminController@adminUserDelete')->name('admin.admins.delete');
+		Route::delete('/delete/{id}','Admin\AdminController@adminDelete')->name('admin.admins.delete');
 	});
 
 });

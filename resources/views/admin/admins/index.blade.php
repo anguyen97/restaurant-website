@@ -173,7 +173,7 @@ Admin
 <!-- ./ModalShow -->
 
 <!-- Modal Edit-->
-<div id="modalEdit" class="modal fade" role="dialog">
+{{-- <div id="modalEdit" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 
 		<!-- Modal content-->
@@ -188,7 +188,7 @@ Admin
 						@csrf
 						{{ method_field('put')}}
 
-						<input type="hidden" name="id" value="" id="id">
+						<input type="hidden" name="admin-id" value="" id="edit-admin-id">
 						<div class="form-group">
 							<label for="">Name</label>
 							<input type="text" class="form-control" id="editT-name" name="name">
@@ -200,7 +200,7 @@ Admin
 			</div>
 		</div>
 	</div>
-</div>
+</div> --}}
 <!-- ./ModalEdit -->
 @endsection
 
@@ -267,7 +267,7 @@ Admin
 				// alert(response.message);
 				$('#modalAdd').modal('hide');				
 
-				$('#tbl-admins').prepend('<tr><td width="5%">'+response.id+'</td><td>'+response.name+'</td><td><img src=\"http://tashres.com/'+response.avatar+'" alt="" height="80px"></td><td>'+response.email+'</td><td>'+response.birthday+'</td><td>'+response.phone+'</td><td>'+response.created_at+'</td><td width="20%"><a title="Detail" class="btn btn-info btn-sm glyphicon glyphicon-eye-open btnShow" data-admin-id="'+response.id+'"></a>&nbsp;&nbsp;<a title="Update" class="btn btn-warning btn-sm glyphicon glyphicon-edit btnEdit" data-admin-id="'+response.id+'"></a>&nbsp;&nbsp;<a title="Delete" class="btn btn-danger btn-sm glyphicon glyphicon-trash btnDelete" data-admin-id="'+response.id+'"></a><td></tr>');
+				$('#tbl-admins').prepend('<tr><td width="5%">'+response.id+'</td><td>'+response.name+'</td><td><img src=\"http://tashres.com/'+response.avatar+'" alt="" height="80px"></td><td>'+response.email+'</td><td>'+response.birthday+'</td><td>'+response.phone+'</td><td>'+response.created_at+'</td><td width="20%"><a title="Detail" class="btn btn-info btn-sm glyphicon glyphicon-eye-open btnShow" data-admin-id="'+response.id+'"></a>&nbsp;&nbsp;<a title="Delete" class="btn btn-danger btn-sm glyphicon glyphicon-trash btnDelete" data-admin-id="'+response.id+'"></a><td></tr>');
 
 				toastr["success"]("Add new admin successfully!");
 
@@ -309,7 +309,7 @@ Admin
 	})
 
 	//delete 
-	$('.btnDelete').on('click', function(e){
+	$('#tbl-admins').on('click', '.btnDelete',function(e){
 
 		var id = $(this).data('admin-id');
 		
@@ -354,63 +354,61 @@ Admin
 	});
 
 	// show info to update
-	$('.btnEdit').on('click', function (event) {
-		$('#modalEdit').modal('show');
+	// $('#tbl-admins').on('click','.btnEdit' ,function (event) {
+	// 	$('#modalEdit').modal('show');
 
-		var id = $(this).data('admin-id');
-		// alert(id);
-		$.ajax({
-			url: '{{ asset('') }}admin/admins/'+id,
-			type: 'GET',
-			success: function(response) {
-				$('#edit-name').text(response.name);
-				$('#formEdit #id').attr('value', response.id);
-				$('#editT-name').attr('value', response.name);
-			},
+	// 	var id = $(this).data('admin-id');
+	// 	// alert(id);
+	// 	$.ajax({
+	// 		url: '{{ asset('') }}admin/admins/'+id,
+	// 		type: 'GET',
+	// 		success: function(response) {
+	// 			$('#edit-name').text(response.name);
+	// 			$('#admin-id').attr('value', response.id);
+	// 			$('#editT-name').attr('value', response.name);
+	// 		},
 
-			error: function() {
-				// body...
-			}
-		})		
-	})
+	// 		error: function() {
+	// 			// body...
+	// 		}
+	// 	})		
+	// })
 
 	//update admin
-	$('#formEdit').on('submit', function(event) {
-		//khong tao cua so moi
-		event.preventDefault();
+	// $('#formEdit').on('submit', function(event) {
+	// 	//khong tao cua so moi
+	// 	event.preventDefault();
 
-		var id = $('#formEdit #id').val();
+	// 	var id = $('#formEdit #id').val();
 
-		var level = $("#parent_id option:selected").attr("data-level"); //
+	// 	var level = $("#parent_id option:selected").attr("data-level"); //
 
-		var row = document.getElementById('row-'+id); //row: admin update
+	// 	var row = document.getElementById('row-'+id); //row: admin update
 
-		// DAU PHAY, reponse: gia tri controller tra ve
-		$.ajax({
-			type: 'put',
-			url: '{{ asset('') }}admin/admins/update/'+id,
-			data: {
-				name: $("#editT-name").val(),
-			},
+	// 	// DAU PHAY, reponse: gia tri controller tra ve
+	// 	$.ajax({
+	// 		type: 'put',
+	// 		url: '{{ asset('') }}admin/admins/update/'+id,
+	// 		data: {
+	// 			name: $("#editT-name").val(),
+	// 		},
 
-			success: function (response) {
-				// alert(response.message);
-				$('#modalEdit').modal('hide');
+	// 		success: function (response) {
+	// 			// alert(response.message);
+	// 			$('#modalEdit').modal('hide');
 				
-				row.remove();
+	// 			row.remove();
 
-				toastr["success"]("Update admin successfully!");
+	// 			toastr["success"]("Update admin successfully!");
 
-				$('#tbladmin').prepend('<tr><td width="5%">'+response.id+'</td><td>'+response.name+'</td><td>'+response.created_at+'</td><td>'+response.updated_at+'</td><td width="20%"><a title="Detail" class="btn btn-info btn-sm glyphicon glyphicon-eye-open btnShow" data-admin-id="'+response.id+'"></a>&nbsp;&nbsp;<a title="Update" class="btn btn-warning btn-sm glyphicon glyphicon-edit btnEdit" data-admin-id="'+response.id+'"></a>&nbsp;&nbsp;<a title="Delete" class="btn btn-danger btn-sm glyphicon glyphicon-trash btnDelete" data-admin-id="'+response.id+'"></a><td></tr>');
+	// 			$('#tbladmin').prepend('<tr><td width="5%">'+response.id+'</td><td>'+response.name+'</td><td>'+response.created_at+'</td><td>'+response.updated_at+'</td><td width="20%"><a title="Detail" class="btn btn-info btn-sm glyphicon glyphicon-eye-open btnShow" data-admin-id="'+response.id+'"></a>&nbsp;&nbsp;<a title="Update" class="btn btn-warning btn-sm glyphicon glyphicon-edit btnEdit" data-admin-id="'+response.id+'"></a>&nbsp;&nbsp;<a title="Delete" class="btn btn-danger btn-sm glyphicon glyphicon-trash btnDelete" data-admin-id="'+response.id+'"></a><td></tr>');			
 
-				
-
-			},
-			error: function (xhr, status, errorThrown){
-				// toastr.error(thrownError);
-			}
-		})
-	});
+	// 		},
+	// 		error: function (xhr, status, errorThrown){
+	// 			// toastr.error(thrownError);
+	// 		}
+	// 	})
+	// });
 	
 </script>
 @endsection 

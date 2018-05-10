@@ -35,7 +35,7 @@ class AdminController extends Controller
 		return Datatables::of($list)
 		->addColumn('action', function ($admin) {
 
-			 return '<a title="Detail" class="btn btn-info btn-sm glyphicon glyphicon-eye-open btnShow" data-admin-id='.$admin["id"].'" id="row-'.$admin["id"].'"></a>&nbsp;&nbsp;<a title="Update" class="btn btn-warning btn-sm glyphicon glyphicon-edit btnEdit" data-admin-id='.$admin["id"].'></a>&nbsp;&nbsp;<a title="Delete" class="btn btn-danger btn-sm glyphicon glyphicon-trash btnDelete" data-admin-id='.$admin["id"].'></a>';
+			 return '<a title="Detail" class="btn btn-info btn-sm glyphicon glyphicon-eye-open btnShow" data-admin-id='.$admin["id"].'" id="row-'.$admin["id"].'"></a>&nbsp;&nbsp;<a title="Delete" class="btn btn-danger btn-sm glyphicon glyphicon-trash btnDelete" data-admin-id='.$admin["id"].'></a>';
 		})
 		->setRowId('id')
         ->make(true);
@@ -68,6 +68,7 @@ class AdminController extends Controller
             $data['avatar']='storage/admins/userDefault.png';
         }
 
+        $data['password']=md5($data['password']);
 		return Admin::create($data);
 		// if ($admins!=null) {			
 		// 	return $admins;
@@ -92,7 +93,7 @@ class AdminController extends Controller
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function adminUserDelete($id)
+	public function adminDelete($id)
 	{
 		Admin::find($id)->delete();
 		return response()->json(['done']);
@@ -104,7 +105,7 @@ class AdminController extends Controller
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	public function adminUserShow($id)
+	public function adminShow($id)
 	{
 		return Admin::find($id);
 	}

@@ -82,7 +82,7 @@ Products
 								<td>
 									<div class="form-group">
 										<label for="">Origin price</label>
-										<input type="text" class="form-control" id="origin-price" placeholder="Origin price" name="origin_price" >
+										<input type="text" class="form-control" id="origin_price" placeholder="Origin price" name="origin_price" >
 									</div>
 								</td>
 							</tr>
@@ -345,7 +345,7 @@ Products
 			{ data: 'id', name: 'id' },
 			{ data: 'name', name: 'name' },
 			{ data: 'thumbnail', name: 'thumbnail', render: function(data, type, full, meta){
-				return '<img src=\"http://tash.restaurant/'+data+'" alt="" height="80px">' }
+				return '<img src=\"http://tashres.com/'+data+'" alt="" height="80px">' }
 			},
 			{ data: 'category_name', name: 'category' },
 			{ data: 'description', name: 'description' },
@@ -382,8 +382,9 @@ Products
 
 			success:function(res){
 				$('#modalAdd').modal('hide');
+				console.log(res);
+				$('#tbl-product').prepend('<tr><td>'+res['id']+'</td><td>'+res['name']+'</td><td><img src="http://tashres.com/'+res['thumbnail']+'" alt=""></td><td>'+res['category_name']+'</td><td>'+res['description']+'</td><td>'+res['created_at']+'</td><td><a name="Detail" class="btn btn-info btn-sm glyphicon glyphicon-eye-open btnShow" data-id="'+res["id"]+'" id="row-'+res["id"]+'"></a>&nbsp;<a name="Update" class="btn btn-warning btn-sm glyphicon glyphicon-edit btnEdit" data-id='+res["id"]+'></a>&nbsp;<a name="Delete" class="btn btn-danger btn-sm glyphicon glyphicon-trash btnDelete" data-id='+res["id"]+'></a></td></tr>');
 				toastr['success']("Add product successfully!");
-				// toastr['success']('Add new product successful');
 			},
 			error:function(xhr, ajaxOptions, thrownError){
 				// console.log(xhr.responseJSON.errors);
@@ -401,7 +402,7 @@ Products
 			type: 'GET',
 			success: function(res) {
 				$('#modalShow').modal('show');
-				$('#show-thumbnail').attr('src', "http://tash.restaurant/"+res.thumbnail);
+				$('#show-thumbnail').attr('src', "http://tashres.com/"+res.thumbnail);
 				$('#show-name').text(res.name);
 				$('#show-description').text(res.description);
 				$('#show-created-at').text(res.created_at);
@@ -432,7 +433,7 @@ Products
 				$('#edit-description').text(res.description);
 				$('#edit-category-old').attr('value',res.category_info.id);
 				$('#edit-category-old').text(res.category_info.name);
-				$('#edit-previewimg').attr('src',"http://tash.restaurant/"+res.thumbnail);
+				$('#edit-previewimg').attr('src',"http://tashres.com/"+res.thumbnail);
 				CKEDITOR.instances.edit_content.setData(res.content);
 			},
 			error: function(xhr, ajaxOptions, thrownError){

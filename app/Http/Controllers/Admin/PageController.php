@@ -45,7 +45,7 @@ class PageController extends Controller
     public function destroyImage($id)
     {
     	Slider::find($id)->delete();
-    	return respone()->json(['done']);
+    	return response()->json(['done']);
     }
 
 
