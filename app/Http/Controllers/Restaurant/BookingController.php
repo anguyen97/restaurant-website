@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Product;
 use App\Booking;
 use App\BookingDetails;
+use App\User;
 
 class BookingController extends Controller
 {
@@ -117,6 +118,21 @@ class BookingController extends Controller
 	{
 		// \Cart::destroy();
 		$data = $request->all();
+		$user_info = User::where('email','=',$data['email'])->first();
+
+		if (!$user_info) {
+			$user_name = explode('@',$data['email'])[0];
+			
+			$user = array(
+				'name' =>$data['name'],
+				'email' =>$data['email'],
+				'phone' =>$data['phone'],
+				'avatar' =>'storage/admins/userDefault.png',
+				'password' => \Hash::make($user_name),
+			);
+			$user = User::create($user);
+		}		
+		
 		$rows = \Cart::content();
 		if ($rows->count()==0) {
 			$data['total']=0;

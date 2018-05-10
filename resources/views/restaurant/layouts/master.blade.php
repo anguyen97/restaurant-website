@@ -136,12 +136,8 @@ http://www.templatemo.com/free-website-templates/417-grill
                         <div class="shop-list">
                             <h4 class="footer-title">Res Categories</h4>
                             <ul>
-                                <li><a href="#"><i class="fa fa-angle-right"></i>New Grill Menu</a></li>
-                                <li><a href="#"><i class="fa fa-angle-right"></i>Healthy Fresh Juices</a></li>
-                                <li><a href="#"><i class="fa fa-angle-right"></i>Spicy Delicious Meals</a></li>
-                                <li><a href="#"><i class="fa fa-angle-right"></i>Simple Italian Pizzas</a></li>
-                                <li><a href="#"><i class="fa fa-angle-right"></i>Pure Good Yogurts</a></li>
-                                <li><a href="#"><i class="fa fa-angle-right"></i>Ice-cream for kids</a></li>
+                                <li><a href="{{ route('restaurant.food') }}"><i class="fa fa-angle-right"></i>Foody</a></li>
+                                <li><a href="{{ route('restaurant.drink') }}"><i class="fa fa-angle-right"></i>Drinks</a></li>
                             </ul>
                         </div>
                     </div>
@@ -171,7 +167,7 @@ http://www.templatemo.com/free-website-templates/417-grill
                     <div class="col-md-3">
                         <div class="more-info">
                             <h4 class="footer-title">More info</h4>
-                            <p>Sed dignissim, diam id molestie faucibus, purus nisl pretium quam, in pulvinar velit massa id elit.</p>
+                            <p>Tashres.com </p>
                             <ul>
                                 <li><i class="fa fa-phone"></i>+84 86.860.33.96</li>
                                 <li><i class="fa fa-globe"></i>Number 1 Dai Co Viet, Hai Ba Trung, Hanoi</li>

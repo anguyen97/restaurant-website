@@ -175,4 +175,5 @@ class ProductController extends Controller
         Product::find($id)->delete();
         return response()->json(['done']);
     }
+
 }

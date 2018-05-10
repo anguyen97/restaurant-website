@@ -21,7 +21,7 @@
 			<div class="col-md-12">
 				<div class="heading-section">
 					<h2>Who We Are</h2>
-					<img src="{{ asset('restaurant/images/under-heading.png') }}" alt="">
+					<img src="{{ asset('storage/sliders/d41d8cd98f00b204e9800998ecf8427e_20180510040508.jpg') }}" alt="" class="img-responsive">
 				</div>
 			</div>
 		</div>
@@ -29,31 +29,39 @@
 		<div class="row">
 			<div class="col-md-6">
 				<h3>Our Company</h3>
-				<p>Nulla sodales ut tellus blandit accumsan. Aliquam erat volutpat. Morbi quis vestibulum erat. Nam malesuada lobortis tempus. Fusce fermentum libero fringilla odio pharetra malesuada. Suspendisse potenti. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nullam ultrices lectus quis consequat fringilla. Mauris non ex et purus sollicitudin tempus vitae quis nisi.</p>
+				<p>Tashres is our product in Web and Online Service (IT4409)</p>
 			</div>
 			<div class="col-md-6">
 				<h3>Team Management</h3>
-				<p>Suspendisse quis consectetur nisi, vitae consequat sem. In et quam id libero venenatis venenatis. Morbi vitae justo vulputate, auctor augue eu, pulvinar augue. Vestibulum placerat sem eu posuere laoreet. Ut ac ex nec urna maximus tristique interdum eget ipsum. Duis at pharetra neque, ut condimentum ex. Nunc tincidunt magna nec aliquam rhoncus. Morbi a posuere nunc.</p>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 			</div>
 		</div>
 
 		<div class="space50"></div>
 
 		<div class="row">
+			@foreach ($image_list as $item)
 			<div class="col-md-2 col-sm-4">
 				<div class="timeline-thumb">
 					<div class="thumb">
-						<img src="{{ asset('restaurant/images/timeline1.jpg') }}" alt="">
+						<img src="{{ asset('') }}{{$item['thumbnail']}}" alt="">
 					</div>
-					<div class="overlay">
+					{{-- <div class="overlay">
 						<div class="timeline-caption">
 							<a href="#"><h4>Breakfast</h4></a>
 							<p>7:30 AM</p>
 						</div>
-					</div>
+					</div> --}}
 				</div>
 			</div>
-			<div class="col-md-2 col-sm-4">
+			@endforeach
+			
+			{{-- <div class="col-md-2 col-sm-4">
 				<div class="timeline-thumb">
 					<div class="thumb">
 						<img src="{{ asset('restaurant/images/timeline2.jpg') }}" alt="">
@@ -117,7 +125,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> --}}
 		</div>
 	</div>
 </div>
@@ -138,7 +146,7 @@
 				<div class="col-md-3 col-sm-6">
 					<div class="team-thumb">
 						<div class="author">
-							<img src="{{ asset('restaurant/images/author1.jpg')}}" alt="Tracy - templatemo">
+							<img src="{{ asset('')}}storage/admins/userDefault.png" alt="Tracy - templatemo">
 						</div>
 						<div class="overlay">
 							<div class="author-caption">
@@ -151,14 +159,14 @@
 						</div>
 					</div>
 					<div class="author-details">
-						<h2>Tracy</h2>
-						<span>Designer</span>
+						<h2>Thái NQ</h2>
+						<span></span>
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-6">
 					<div class="team-thumb">
 						<div class="author">
-							<img src="{{ asset('restaurant/images/author2.jpg')}}" alt="Mary - templatemo">
+							<img src="{{ asset('')}}storage/admins/userDefault.png" alt="Mary - templatemo">
 						</div>
 						<div class="overlay">
 							<div class="author-caption">
@@ -171,14 +179,14 @@
 						</div>
 					</div>
 					<div class="author-details">
-						<h2>Mary</h2>
-						<span>Developer</span>
+						<h2>Anh NT</h2>
+						<span></span>
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-6">
 					<div class="team-thumb">
 						<div class="author">
-							<img src="{{ asset('restaurant/images/author3.jpg')}}" alt="Julia - templatemo">
+							<img src="{{ asset('')}}storage/admins/userDefault.png" alt="Julia - templatemo">
 						</div>
 						<div class="overlay">
 							<div class="author-caption">
@@ -191,14 +199,14 @@
 						</div>
 					</div>
 					<div class="author-details">
-						<h2>Julia</h2>
-						<span>Director</span>
+						<h2>Huyền TTM</h2>
+						<span></span>
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-6">
 					<div class="team-thumb">
 						<div class="author">
-							<img src="{{ asset('restaurant/images/author4.jpg')}}" alt="Linda - templatemo">
+							<img src="{{ asset('')}}storage/admins/userDefault.png" alt="Linda - templatemo">
 						</div>
 						<div class="overlay">
 							<div class="author-caption">
@@ -211,8 +219,8 @@
 						</div>
 					</div>
 					<div class="author-details">
-						<h2>Linda</h2>
-						<span>Manager</span>
+						<h2>Song LV</h2>
+						<span></span>
 					</div>
 				</div>
 			</div>
@@ -227,7 +235,7 @@
 			<div class="col-md-12">
 				<div class="heading-section">
 					<h2>Testimonials and Awards</h2>
-					<img src="{{ asset('restaurant/images/under-heading.png') }}') }}" alt="">
+					{{-- <img src="{{ asset('')}}storage/admins/userDefault.png" alt="" > --}}
 				</div>
 			</div>
 		</div>

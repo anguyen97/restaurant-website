@@ -34,7 +34,10 @@ class HomeController extends Controller
      */
     public function getAboutUs()
     {
-    	return view('restaurant.pages.aboutUs');
+        $image_list = Product::take(6)->get();
+    	return view('restaurant.pages.aboutUs',[
+            'image_list' =>$image_list,
+        ]);
     }
 
     /**
