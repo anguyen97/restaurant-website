@@ -5,8 +5,8 @@ namespace App\Http\Controllers\AdminAuth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Socialite;
-use Auth;
 use App\Admin;
+use Auth;
 
 class GoogleController extends Controller
 {
@@ -36,25 +36,16 @@ class GoogleController extends Controller
     		'google_id' => $user->id,
     	);
 
-        // dd($user);
-
     	$mail_name = explode('@', $user->email)[0];
 
     	$data['password'] = md5($mail_name);
 
-    	$exist = Admin::where('email','=',$user->email)->first();
-
-    	if (!$exist) {
-    		
-    		return redirect()->route('admin.login');
-
-    	} else {
     		$user_log = Admin::firstOrCreate(['email' => $user->email], $data);
 
     		Auth::guard('admin')->loginUsingId($user_log->id);
 
     		return redirect()->route('admin.home');
-    	}
+    	
 
     }
 }
